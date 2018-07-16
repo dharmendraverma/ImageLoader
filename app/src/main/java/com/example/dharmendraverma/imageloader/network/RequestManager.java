@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.text.TextUtils;
 
 import com.example.dharmendraverma.imageloader.interfaces.ApiResponseListener;
+import com.example.dharmendraverma.imageloader.utils.Utils;
 
 import java.util.HashMap;
 
@@ -37,7 +38,7 @@ public class RequestManager {
             return;
         }
 
-        String url = "add the query";
+        String url =  Utils.buildSearchApiUrl(query);
         getResponseTask = new GetResponseTask(query, url, activity, new ApiResponseListener() {
             @Override
             public void onSuccess(String key, String jsonObject) {
