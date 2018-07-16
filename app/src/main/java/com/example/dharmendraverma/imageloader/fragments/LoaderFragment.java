@@ -14,8 +14,15 @@ import android.widget.SearchView;
 
 import com.example.dharmendraverma.imageloader.R;
 import com.example.dharmendraverma.imageloader.adapters.ImageRenderAdapter;
+import com.example.dharmendraverma.imageloader.dataobject.ApiSearchData;
 import com.example.dharmendraverma.imageloader.dataobject.Feed;
+import com.example.dharmendraverma.imageloader.dataobject.Photo;
+import com.example.dharmendraverma.imageloader.dataobject.Photos;
+import com.example.dharmendraverma.imageloader.interfaces.ApiResponseListener;
+import com.example.dharmendraverma.imageloader.network.RequestManager;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -85,12 +92,8 @@ public class LoaderFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-                //                if (list.contains(query)) {
-                //                    adapter.getFilter().filter(query);
-                //                } else {
-                //                    Toast.makeText(MainActivity.this, "No Match found", Toast.LENGTH_LONG).show();
-                //                }
+                toggleLoader(true);
+                RequestManager.getInstance().submitQuery(query.trim().toLowerCase(), getActivity(), listener);
                 return false;
             }
 
@@ -101,6 +104,27 @@ public class LoaderFragment extends Fragment {
             }
         });
     }
+
+    private ApiResponseListener listener = new ApiResponseListener() {
+        @Override
+        public void onSuccess(String key, String jsonObject) {
+            toggleLoader(false);
+            ApiSearchData apiSearchData = new Gson().fromJson(jsonObject, ApiSearchData.class);
+            ArrayList<Feed> list = new ArrayList<>();
+            Photos photos = apiSearchData.getPhotos();
+            for (Photo photo : photos.getPhoto()) {
+                Feed feed = new Feed();
+                feed.setPhoto(photo);
+                list.add(feed);
+            }
+            addItemsFromApi(list);
+        }
+
+        @Override
+        public void onFailure() {
+            toggleLoader(false);
+        }
+    };
 
     void toggleLoader(boolean showLoader) {
         progress.setVisibility(showLoader ? View.VISIBLE : View.GONE);

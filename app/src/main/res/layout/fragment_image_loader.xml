@@ -1,49 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <SearchView
         android:id="@+id/searchView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/go"
         android:iconifiedByDefault="false"
         android:queryHint="Search Here" />
+
+    <ImageView
+        android:id="@+id/go"
+        android:background="@mipmap/ic_launcher_round"
+        android:layout_alignParentRight="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="465dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/searchView"
         android:layout_gravity="center"
         android:clipToPadding="false"
-        android:scrollbars="none"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="46dp" />
+        android:paddingTop="8dp"
+        android:scrollbars="none" />
 
     <FrameLayout
         android:id="@+id/progress"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
+        android:layout_height="match_parent">
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"/>
     </FrameLayout>
 
-    <ImageView
-        android:id="@+id/go"
-        android:layout_width="50dp"
-        android:layout_height="0dp"
-        android:background="@mipmap/ic_launcher_round"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="318dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

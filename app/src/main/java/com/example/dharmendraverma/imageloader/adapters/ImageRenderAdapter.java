@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.example.dharmendraverma.imageloader.R;
 import com.example.dharmendraverma.imageloader.dataobject.Feed;
+import com.example.dharmendraverma.imageloader.utils.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,20 +39,22 @@ public class ImageRenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Feed feed = mList.get(position);
+        ImageView imageView = ((PhotoItemHolder)holder).imageView;
+        new ImageLoader(mContext).DisplayImage(feed.getmImageUrl(),imageView,feed.getPhoto().getId());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+         return mList == null ? 0 : mList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (mList.get(position).getObjType().equalsIgnoreCase(LOAD_MORE_OBJ_TYPE)) {
+       /* if (mList.get(position).getObjType().equalsIgnoreCase(LOAD_MORE_OBJ_TYPE)) {
             return VIEW_TYPE_LOAD_MORE;
-        } else {
+        } else {*/
             return VIEW_TYPE_ITEM;
-        }
+      //  }
     }
 
     public void setList(List<Feed> list) {
@@ -64,7 +67,7 @@ public class ImageRenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         private ImageView imageView;
         public PhotoItemHolder(View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.image);
+            imageView=itemView.findViewById(R.id.imagegrid);
         }
 
         @Override
