@@ -35,7 +35,7 @@ public class LoaderFragment extends Fragment {
     private RecyclerView recyclerView;
     private ImageView searchIv;
     private View progress;
-    private int mSpanCount = 2;
+    private int mSpanCount = 3;
 
     private ImageRenderAdapter imageRenderAdapter;
 
