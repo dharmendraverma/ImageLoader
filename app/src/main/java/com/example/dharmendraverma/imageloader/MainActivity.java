@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.dharmendraverma.imageloader.R;
 import com.example.dharmendraverma.imageloader.fragments.LoaderFragment;
 
 public class MainActivity extends AppCompatActivity {
