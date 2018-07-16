@@ -35,6 +35,7 @@ public class LoaderFragment extends Fragment {
     private RecyclerView recyclerView;
     private ImageView searchIv;
     private View progress;
+    private int mSpanCount = 2;
 
     private ImageRenderAdapter imageRenderAdapter;
 
@@ -71,8 +72,17 @@ public class LoaderFragment extends Fragment {
                 searchView.setQuery(searchView.getQuery(), true);
             }
         });
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        setLayoutManger();
         return rootView;
+    }
+
+    void setLayoutManger(){
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), mSpanCount));
+    }
+
+    public void setSpanCount(int spanCount){
+        mSpanCount = spanCount;
+        setLayoutManger();
     }
 
     @Override
